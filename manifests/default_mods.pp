@@ -11,6 +11,10 @@ class apache::default_mods (
     default: {}
   }
   apache::mod { 'authz_host': }
+  apache::mod { 'env': }
+  include apache::mod::mime
+  include apache::mod::deflate
+  include apache::mod::setenvif
 
   # The rest of the modules only get loaded if we want all modules enabled
   if $all {
@@ -60,17 +64,13 @@ class apache::default_mods (
     include apache::mod::autoindex
     include apache::mod::dav
     include apache::mod::dav_fs
-    include apache::mod::deflate
     include apache::mod::dir
-    include apache::mod::mime
     include apache::mod::negotiation
-    include apache::mod::setenvif
     include apache::mod::status
     apache::mod { 'auth_basic': }
     apache::mod { 'authn_file': }
     apache::mod { 'authz_default': }
     apache::mod { 'authz_groupfile': }
     apache::mod { 'authz_user': }
-    apache::mod { 'env': }
   }
 }
