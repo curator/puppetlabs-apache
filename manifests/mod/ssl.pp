@@ -1,6 +1,6 @@
 class apache::mod::ssl (
   $ssl_compression = false,
-) {
+) inherits apache::params {
   $session_cache = $::osfamily ? {
     'debian' => '${APACHE_RUN_DIR}/ssl_scache(512000)',
     'redhat' => '/var/cache/mod_ssl/scache(512000)',
